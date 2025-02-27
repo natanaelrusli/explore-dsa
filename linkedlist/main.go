@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"log"
 )
 
 type ListNode struct {
@@ -23,6 +24,17 @@ func NewSinglyLinkedList[T any]() *SinglyLinkedList[T] {
 	return &SinglyLinkedList[T]{
 		Head: nil,
 	}
+}
+
+func (ll *SinglyLinkedList[T]) GetSize() int {
+	size := 0
+	curr := ll.Head
+	for curr != nil {
+		size++
+		curr = curr.Next
+	}
+
+	return size
 }
 
 func (list *SinglyLinkedList[T]) Add(value T) {
@@ -206,12 +218,14 @@ func main() {
 	singlyll.Add(5)
 	singlyll.Add(6)
 
-	// err := singlyll.RemoveFirstItem()
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
+	err := singlyll.RemoveFirstItem()
+	if err != nil {
+		log.Fatal(err)
+	}
 	singlyll.RemoveFirstItem()
 	singlyll.RemoveLastItem()
+	llSize := singlyll.GetSize()
+	fmt.Println("size: ", llSize)
 
 	singlyll.Print()
 }
