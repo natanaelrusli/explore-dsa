@@ -1,39 +1,39 @@
 package main
 
-import "log"
+import "fmt"
 
 // Time Complexity: O(n^2)
 func BubbleSort(arr []int) []int {
 	for i := 0; i < len(arr); i++ {
-		for j := 0; j < len(arr)-i-1; j++ {
+		for j := 0; j < len(arr)-1-i; j++ {
 			if arr[j] > arr[j+1] {
 				arr[j], arr[j+1] = arr[j+1], arr[j]
 			}
 		}
 	}
+
 	return arr
 }
 
-// Time Complexity: O(n log n)
 func MergeSort(arr []int) []int {
+	// preflight check
+	// negative space programming
+	// check if the array have no or 1 item
 	if len(arr) <= 1 {
 		return arr
 	}
 
-	// divide
+	// Step 1: Divide the array
 	mid := len(arr) / 2
+
+	// Step 2: Recursively divide each half
 	left := MergeSort(arr[:mid])
 	right := MergeSort(arr[mid:])
 
-	// conquer
-	return merge(left, right)
-}
-
-func merge(left, right []int) []int {
 	result := make([]int, 0, len(left)+len(right))
 	leftIndex, rightIndex := 0, 0
 
-	// combine
+	// Step 3: Sort the subarrays
 	for leftIndex < len(left) && rightIndex < len(right) {
 		if left[leftIndex] <= right[rightIndex] {
 			result = append(result, left[leftIndex])
@@ -44,15 +44,37 @@ func merge(left, right []int) []int {
 		}
 	}
 
+	// Step 4: Merge the final 2 halves
 	result = append(result, left[leftIndex:]...)
 	result = append(result, right[rightIndex:]...)
 
 	return result
 }
 
-func main() {
-	arr := []int{3, 5, 1, 3, 2, 8, 7}
+func QuickSort(arr []int) []int {
+	if len(arr) <= 1 {
+		return arr
+	}
 
-	log.Println(BubbleSort(arr))
-	log.Println(MergeSort(arr))
+	pivot := arr[0]
+	var left, right []int
+
+	for _, v := range arr {
+		if v <= pivot {
+			left = append(left, v)
+		} else {
+			right = append(right, v)
+		}
+	}
+
+	left = QuickSort(left)
+	right = QuickSort(right)
+
+	// ... at the end means spread the elements
+	return append(append(left, pivot), right...)
+}
+
+func main() {
+	arr := []int{100, 38, 27, 43, 3, 9, 82, 10}
+	fmt.Println(MergeSort(arr))
 }
