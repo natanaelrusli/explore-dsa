@@ -210,7 +210,7 @@ func TestSearchComparison(t *testing.T) {
 	target := 13
 	expectedIndex := 6
 
-	// Test both search algorithms
+	// Test both search algorithms3
 	binaryResult := BinarySearch(arr, target)
 	linearResult := LinearSearch(arr, target)
 
@@ -225,5 +225,48 @@ func TestSearchComparison(t *testing.T) {
 	// Verify both algorithms return the same result
 	if binaryResult != linearResult {
 		t.Errorf("Search results don't match: Binary=%v, Linear=%v", binaryResult, linearResult)
+	}
+}
+
+func TestJumpSearch(t *testing.T) {
+	tests := []struct {
+		name     string
+		arr      []int
+		target   int
+		expected int
+	}{
+		{
+			name:     "Found in middle",
+			arr:      []int{1, 2, 3, 4, 5, 6, 7},
+			target:   4,
+			expected: 3,
+		},
+		{
+			name:     "Found at beginning",
+			arr:      []int{1, 2, 3, 4, 5},
+			target:   1,
+			expected: 0,
+		},
+		{
+			name:     "Found at end",
+			arr:      []int{1, 2, 3, 4, 5},
+			target:   5,
+			expected: 4,
+		},
+		{
+			name:     "Not found - too small",
+			arr:      []int{1, 2, 3, 4, 5},
+			target:   0,
+			expected: -1,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			result := JumpSearch(tt.arr, tt.target)
+			if result != tt.expected {
+				t.Errorf("JumpSearch() = %v, want %v", result, tt.expected)
+			}
+		})
 	}
 }

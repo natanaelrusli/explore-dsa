@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 func BinarySearch(arr []int, target int) int {
 	left := 0
@@ -36,9 +39,58 @@ func LinearSearch(arr []int, target int) int {
 	return -1
 }
 
+func JumpSearch(arr []int, target int) int {
+	n := len(arr)
+	if n == 0 {
+		return -1
+	}
+	if n <= 1 {
+		if arr[0] == target {
+			return 0
+		}
+		return -1
+	}
+
+	// Finding the optimal jump step size
+	step := int(math.Sqrt(float64(n)))
+
+	// Finding the block where element is present (if exists)
+	prev := 0
+
+	// Jump to the next block as long as target is greater than current element
+	for curr := step; curr < n && arr[min(curr, n-1)] < target; {
+		prev = curr
+		curr += step
+	}
+
+	// Do linear search within the identified block
+	for j := prev; j <= min(prev+step, n); j++ {
+		if arr[j] == target {
+			return j
+		}
+		// If we find a larger element, target doesn't exist
+		if arr[j] > target {
+			return -1
+		}
+	}
+
+	return -1
+}
+
+// Helper function to find minimum of two integers
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
+
 func main() {
 	// Example usage with different scenarios
 	numbers := []int{64, 34, 25, 12, 22, 11, 90}
+	sortedNumbers := []int{1, 2, 3, 4, 5}
+
+	fmt.Println(JumpSearch(sortedNumbers, 5))
 
 	// Case 1: Searching for a number that exists
 	result := LinearSearch(numbers, 12)
