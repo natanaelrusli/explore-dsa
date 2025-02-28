@@ -76,5 +76,5 @@ func QuickSort(arr []int) []int {
 
 func main() {
 	arr := []int{100, 38, 27, 43, 3, 9, 82, 10}
-	fmt.Println(MergeSort(arr))
+	fmt.Println(BubbleSort(arr))
 }

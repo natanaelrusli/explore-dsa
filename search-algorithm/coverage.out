@@ -1,0 +1,16 @@
+mode: set
+search-algorithm/main.go:5.46,9.20 3 1
+search-algorithm/main.go:22.2,22.11 1 1
+search-algorithm/main.go:9.20,12.25 2 1
+search-algorithm/main.go:15.3,15.24 1 1
+search-algorithm/main.go:12.25,14.4 1 1
+search-algorithm/main.go:15.24,17.4 1 1
+search-algorithm/main.go:17.9,19.4 1 1
+search-algorithm/main.go:27.46,29.32 1 1
+search-algorithm/main.go:36.2,36.11 1 1
+search-algorithm/main.go:29.32,31.23 1 1
+search-algorithm/main.go:31.23,33.4 1 1
+search-algorithm/main.go:39.13,57.25 10 0
+search-algorithm/main.go:62.2,72.31 2 0
+search-algorithm/main.go:57.25,59.3 1 0
+search-algorithm/main.go:72.31,76.3 2 0
